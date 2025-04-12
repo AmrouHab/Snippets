@@ -30,14 +30,14 @@ if (Test-Path $uninstallKey) {
 }
 
 # Lock Mesh Agent service to prevent uninstall
-$service = Get-Service "Mesh Agent" -ErrorAction SilentlyContinue
-if ($service) {
-    Set-Service -Name $service.Name -StartupType Automatic
-    $sdsetCommand = 'D:(A;;CCLCSWLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)'
-    # Corrected way to run the command with sc.exe
-    $scCommand = "sc.exe sdset $($service.Name) '$sdsetCommand'"
-    Invoke-Expression $scCommand
-}
+#$service = Get-Service "Mesh Agent" -ErrorAction SilentlyContinue
+#if ($service) {
+#    Set-Service -Name $service.Name -StartupType Automatic
+#    $sdsetCommand = 'D:(A;;CCLCSWLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)'
+#    # Corrected way to run the command with sc.exe
+#    $scCommand = "sc.exe sdset $($service.Name) '$sdsetCommand'"
+#    Invoke-Expression $scCommand
+#}
 
 # Delete the specific AT-agent.exe from the Recycle Bin
 $recycleBinPath = [System.IO.Path]::Combine($env:SystemDrive, '\$Recycle.Bin')
