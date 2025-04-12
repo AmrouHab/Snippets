@@ -34,7 +34,9 @@ $service = Get-Service "Mesh Agent" -ErrorAction SilentlyContinue
 if ($service) {
     Set-Service -Name $service.Name -StartupType Automatic
     $sdsetCommand = 'D:(A;;CCLCSWLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)'
-    sc.exe sdset $service.Name $sdsetCommand
+    # Corrected way to run the command with sc.exe
+    $scCommand = "sc.exe sdset $($service.Name) '$sdsetCommand'"
+    Invoke-Expression $scCommand
 }
 
 # Delete the specific AT-agent.exe from the Recycle Bin
