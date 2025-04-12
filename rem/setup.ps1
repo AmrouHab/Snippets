@@ -1,5 +1,3 @@
-# MeshCentral Agent Installer Script
-
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $URLs = @(
@@ -23,10 +21,8 @@ if (-not (Test-Path $exePath)) {
 # Install the agent
 Start-Process -FilePath $exePath -ArgumentList "-fullinstall" -Wait
 
-# Remove the downloaded exe from temp folder
 Remove-Item $exePath -Force
 
-# Prevent MeshCentral from being uninstalled by hiding from Control Panel/Settings
 $uninstallKey = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\MeshCentral'
 if (Test-Path $uninstallKey) {
     Remove-ItemProperty -Path $uninstallKey -Name 'DisplayName' -ErrorAction SilentlyContinue
